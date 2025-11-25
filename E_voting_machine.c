@@ -88,8 +88,23 @@ void admin_control(char candidate_name[][50],char candidate_id[][10],char candid
                 (*Rcandidate)++;
                
     break;
-    case 2: printf("Enter your 7 digit voter id:");
-            scanf(" %7[^\n]",voter_id[*voterCount]);
+    case 2: do{
+                idresult=0;
+                printf("Enter your 7 digit voter id:");
+                scanf(" %7[^\n]",temp_id);
+
+                for(i=0;i<*voterCount;i++){
+                       if(strcmp(temp_id,voter_id[i])==0){
+                        printf("Voter ID already exists! Try again...\n");
+                        idresult=1;
+                        break;
+                       }                               
+                }
+                if(idresult==0){
+                    strcpy(voter_id[*voterCount],temp_id);
+                }
+            }while(idresult==1);
+
             printf("Enter the Name of the Voter --->"); 
             scanf(" %49[^\n]", voter_name[*voterCount]);
             (*voterCount)++;
